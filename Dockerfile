@@ -1,4 +1,5 @@
-FROM rocker/rstudio:3.5.2
+# FROM rocker/rstudio:3.5.2
+FROM rocker/rstudio:devel
 
 RUN export ADD=shiny && bash /etc/cont-init.d/add
 
@@ -13,9 +14,6 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
   libcurl4-openssl-dev \
   libssh2-1-dev \
   unixodbc-dev \
-  default-jdk \
-  r-cran-rjava \
-  liblzma-dev \
   && install2.r --error \
     --deps TRUE \
     tidyverse \
@@ -25,8 +23,16 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     remotes \
     selectr \
     caTools \
-	BiocManager \
+	BiocManager
+
+	
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+  default-jdk \
+  r-cran-rjava \
+  && install2.r --error \
     mailR \
     shinyalert \
     shinydashboard \
     httr
+
+RUN apt-get update -qq
