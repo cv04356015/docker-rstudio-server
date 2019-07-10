@@ -34,5 +34,3 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     shinyalert \
     shinydashboard \
     httr
-
-RUN apt-get update -qq
